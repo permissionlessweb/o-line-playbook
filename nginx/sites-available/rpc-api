@@ -10,7 +10,7 @@
     }
 
     server {
-        server_name testnet-rpc.terp.network;
+        server_name <your-rpc-dns-endpoint>;
 
         # websocket connection here (We convert wss to ws so we do not have to deal with certs)
         location /websocket {
@@ -45,7 +45,7 @@
 }
 
     server {
-        server_name testnet-api.terp.network;
+        server_name <your-api-dns-endpoint>;
 
         location / {
             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
@@ -64,4 +64,3 @@
         }
     
 
-}
