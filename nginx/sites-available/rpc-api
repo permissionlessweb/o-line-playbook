@@ -62,5 +62,3 @@
 
             proxy_pass http://rest_cache;
         }
-    
-

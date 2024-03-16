@@ -13,11 +13,11 @@
                 defer
         }
 
-artela-testnet-rpc.itrocket.net, www.artela-testnet-rpc.itrocket.net {
+<your-rpc-dns-endpoint>, www.<your-rpc-dns-endpoint> {
         import cors-and-tls
         reverse_proxy  localhost:<rpc_port>
 }
-artela-testnet-api.itrocket.net, www.artela-testnet-api.itrocket.net {
+<your-api-dns-endpoint>, www.<your-api-dns-endpoint> {
         import cors-and-tls
         reverse_proxy  localhost:<api_port>
 }
