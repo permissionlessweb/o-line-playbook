@@ -21,3 +21,4 @@
         import cors-and-tls
         reverse_proxy  localhost:<api_port>
 }
+}
