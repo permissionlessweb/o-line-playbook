@@ -16,16 +16,15 @@ if [ "$ACTION" == "1" ]; then
     fi
 
     # Update app.toml
+        # -e "/^\[grpc-web\]$/,/^\[/ s/^enable-unsafe-cors *=.*/enable-unsafe-cors = \"true\"/" \
+        # -e "/^\[api\]$/,/^\[/ s/^enabled-unsafe-cors *=.*/enabled-unsafe-cors = \"true\"/" \
     sed -i \
         -e "s/^pruning *=.*/pruning = \"nothing\"/" \
         -e "/^\[api\]$/,/^\[/ s/^enable *=.*/enable = \"true\"/" \
         -e "/^\[api\]$/,/^\[/ s/^swagger *=.*/swagger = \"true\"/" \
-        -e "/^\[api\]$/,/^\[/ s/^enabled-unsafe-cors *=.*/enabled-unsafe-cors = \"true\"/" \
         -e "/^\[rosetta\]$/,/^\[/ s/^enable *=.*/enable = \"false\"/" \
         -e "/^\[grpc\]$/,/^\[/ s/^enable *=.*/enable = \"true\"/" \
         -e "/^\[grpc-web\]$/,/^\[/ s/^enable *=.*/enable = \"true\"/" \
-        -e "/^\[grpc-web\]$/,/^\[/ s/^enable-unsafe-cors *=.*/enable-unsafe-cors = \"true\"/" \
-        -e "/^\[grpc-web\]$/,/^\[/ s/^enable-unsafe-cors *=.*/enable-unsafe-cors = \"true\"/" \
         -e "/^\[state-sync\]$/,/^\[/ s/^snapshot-interval *=.*/snapshot-interval = \"1000\"/" \
         -e "/^\[state-sync\]$/,/^\[/ s/^snapshot-keep-recent *=.*/snapshot-keep-recent = \"2\"/" \
         "${CONF_PATH}app.toml"
@@ -49,13 +48,13 @@ elif [ "$ACTION" == "2" ]; then
     fi
 
     # Update app.toml
+        # -e "/^\[json-rpc\]$/,/^\[/ s%^ws-address *=.*%ws-address = \"127.0.0.1:${CONF_PORT}546\"%" \
     sed -i \
         -e "/^\[api\]$/,/^\[/ s%^address *=.*%address = \"tcp://0.0.0.0:${CONF_PORT}317\"%" \
         -e "/^\[rosetta\]$/,/^\[/ s%^address *=.*%address = \":${CONF_PORT}080\"%" \
         -e "/^\[grpc\]$/,/^\[/ s%^address *=.*%address = \"0.0.0.0:${CONF_PORT}090\"%" \
         -e "/^\[grpc-web\]$/,/^\[/ s%^address *=.*%address = \"0.0.0.0:${CONF_PORT}091\"%" \
         -e "/^\[json-rpc\]$/,/^\[/ s%^address *=.*%address = \"127.0.0.1:${CONF_PORT}545\"%" \
-        -e "/^\[json-rpc\]$/,/^\[/ s%^ws-address *=.*%ws-address = \"127.0.0.1:${CONF_PORT}546\"%" \
         -e "/^\[json-rpc\]$/,/^\[/ s%^metrics-address *=.*%metrics-address = \"127.0.0.1:${CONF_PORT}065\"%" \
         "${CONF_PATH}app.toml"
 
